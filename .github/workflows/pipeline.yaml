@@ -24,8 +24,9 @@ jobs:
         pip install flake8 pytest
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag psi-app-demo:latest
-            docker save psi-app-demo:latest > /tmp/myimage.tar
+      run: |
+        docker build . --file Dockerfile --tag psi-app-demo:latest
+        docker save psi-app-demo:latest > /tmp/myimage.tar
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
