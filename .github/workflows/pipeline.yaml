@@ -63,7 +63,7 @@ jobs:
         project_id: 'psi-app-demo-300'
         workload_identity_provider: 'projects/919687749794/locations/global/workloadIdentityPools/github-actions/providers/github'
         service_account: 'psi-app-demo@psi-app-demo-300.iam.gserviceaccount.com'
-    -name: Upload docker image
+    - name: Upload docker image
       run: |
         docker load --input /tmp/psi-app-demo.tar
         docker tag psi-app-demo:latest gcr.io/psi-app-demo-300/psi-app-demo:latest
