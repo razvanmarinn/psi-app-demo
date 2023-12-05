@@ -77,9 +77,7 @@ jobs:
         docker load --input /tmp/psi-app-demo.tgz
         docker tag psi-app-demo:latest gcr.io/psi-app-demo-300/psi-app-demo:latest
         docker push gcr.io/psi-app-demo-300/psi-app-demo:latest
-    - name: Deploy to Cloud Run
-      uses: google-github-actions/deploy-cloudrun@main
-      with:
-        image: gcr.io/psi-app-demo-300/psi-app-demo:latest
-        service: psi-app-demo
+    - name: Deploy to cloud run job
+      run: |
+        gcloud run deploy psi-app-demo --image gcr.io/psi-app-demo-300/psi-app-demo:latest --platform managed --region us-central1 --allow-unauthenticated
   
