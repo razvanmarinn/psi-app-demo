@@ -69,17 +69,17 @@ jobs:
     - name: Authenticate with Google Cloud
       uses: 'google-github-actions/auth@v2'
       with:
-        workload_identity_provider: 'projects/919687749794/locations/global/workloadIdentityPools/github-actions/providers/github'
+        workload_identity_ provider: 'projects/919687749794/locations/global/workloadIdentityPools/github-actions/providers/github'
         service_account: 'psi-app-demo@psi-app-demo-300.iam.gserviceaccount.com'
     - name: Upload docker image
       run: |
-        gcloud auth configure-docker -q
-        docker load --input /tmp/psi-app-demo.tar
-        docker tag psi-app-demo:latest gcr.io/psi-app-demo-300/psi-app-demo:latest
-        docker push gcr.io/psi-app-demo-300/psi-app-demo:latest
-    - name: Deploy to Cloud Run
-      uses: google-github-actions/deploy-cloudrun@main
-      with:
-        image: gcr.io/psi-app-demo-300/psi-app-demo:latest
-        service: psi-app-demo
+        gcloud auth configure-docker
+    #     docker load --input /tmp/psi-app-demo.tar
+    #     docker tag psi-app-demo:latest gcr.io/psi-app-demo-300/psi-app-demo:latest
+    #     docker push gcr.io/psi-app-demo-300/psi-app-demo:latest
+    # - name: Deploy to Cloud Run
+    #   uses: google-github-actions/deploy-cloudrun@main
+    #   with:
+    #     image: gcr.io/psi-app-demo-300/psi-app-demo:latest
+    #     service: psi-app-demo
   
