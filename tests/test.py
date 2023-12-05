@@ -8,7 +8,7 @@ parent_dir = os.path.dirname(current_dir)
 # Add the parent directory to sys.path
 sys.path.insert(0, parent_dir)
 
-from app.src.main import hello_world
+from src.main import hello_world
 
 def test_hello_world():
     asd = hello_world()
