@@ -26,12 +26,12 @@ jobs:
     - name: Build the Docker image
       run: |
         docker build . --file Dockerfile --tag psi-app-demo:latest
-        docker save psi-app-demo:latest > /tmp/psi-app-demo.tar
+        docker save psi-app-demo:latest > /tmp/psi-app-demo.tgz
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
         name: psi-app-demo
-        path: /tmp/psi-app-demo.tar
+        path: /tmp/psi-app-demo.tgz
 
     # - name: Run Flake8
     #   run: flake8 main.py --max-line-length=200
@@ -46,7 +46,7 @@ jobs:
         path: /tmp
     - name: Run tests
       run: |
-        docker load --input /tmp/psi-app-demo.tar
+        docker load --input /tmp/psi-app-demo.tgz
         docker run psi-app-demo:latest pytest tests/test.py --verbose
   deploy:
     needs: test
@@ -70,10 +70,10 @@ jobs:
       uses: 'google-github-actions/auth@v2'
       with:
         workload_identity_provider: 'projects/919687749794/locations/global/workloadIdentityPools/github-actions/providers/github'
-        service_account: 'psi-app-demo@psi-app-demo-300.iam.gserviceaccount.com'
+        service_account: psi-app-demo@psi-app-demo-300.iam.gserviceaccount.com
     - name: Deploy to Cloud Run
       uses: google-github-actions/deploy-cloudrun@main
       with:
         service: psi-app-demo
-        source: /tmp/psi-app-demo.tar
+        source: /tmp/psi-app-demo.tgz
   
