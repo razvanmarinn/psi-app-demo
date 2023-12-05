@@ -63,9 +63,14 @@ jobs:
         project_id: 'psi-app-demo-300'
         workload_identity_provider: 'projects/919687749794/locations/global/workloadIdentityPools/github-actions/providers/github'
         service_account: 'psi-app-demo@psi-app-demo-300.iam.gserviceaccount.com'
+    -name: Upload docker image
+      run: |
+        docker load --input /tmp/psi-app-demo.tar
+        docker tag psi-app-demo:latest gcr.io/psi-app-demo-300/psi-app-demo:latest
+        docker push gcr.io/psi-app-demo-300/psi-app-demo:latest
     - name: Deploy to Cloud Run
       uses: google-github-actions/deploy-cloudrun@main
       with:
-        image: gcr.io/${{ secrets.GCP_PROJECT_ID }}/psi-app-demo:latest
+        image: gcr.io/psi-app-demo-300/psi-app-demo:latest
         service: psi-app-demo
   
