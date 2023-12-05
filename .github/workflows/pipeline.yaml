@@ -48,13 +48,26 @@ jobs:
       run: |
         docker load --input /tmp/psi-app-demo.tar
         docker run psi-app-demo:latest pytest tests/test.py --verbose
-  # deploy:
-  #   runs on: ubuntu-latest
-  #   needs: test
-  #   steps:
-  #   - name: Deploy to Heroku
-  #     uses: akhileshns/heroku-deploy@v3.12.12
-  #     with:
-  #       heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-  #       heroku_app_name: "my-app-name"
-  #       heroku_email: "
+deploy:
+# deploy to google cloud run
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: psi-app-demo
+        path: /tmp
+    - name: Authenticate with Google Cloud
+      uses: 'google-github-actions/auth@v2'
+      with:
+        project_id: 'psi-app-demo-300'
+        workload_identity_provider: 'projects/919687749794/locations/global/workloadIdentityPools/github-actions/providers/github'
+        service_account: 'psi-app-demo@psi-app-demo-300.iam.gserviceaccount.com'
+    - name: Deploy to Cloud Run
+      uses: google-github-actions/deploy-cloudrun@main
+      with:
+        image: gcr.io/${{ secrets.GCP_PROJECT_ID }}/psi-app-demo:latest
+        service: psi-app-demo
+  
