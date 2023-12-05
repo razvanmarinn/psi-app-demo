@@ -6,8 +6,7 @@ COPY requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY main.py .
-COPY __init__.py .
+COPY src/ src/
 COPY tests/ tests/
 
-CMD ["python", "main.py"]
+CMD ["python", "src/main.py"]
