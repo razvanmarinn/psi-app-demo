@@ -1,4 +1,4 @@
-from .. import main
+from app import main
 
 def test_hello_world():
     asd = main.hello_world()
