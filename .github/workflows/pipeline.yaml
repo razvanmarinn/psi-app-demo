@@ -74,9 +74,9 @@ jobs:
     - name: Upload docker image
       run: |
         gcloud auth configure-docker
-    #     docker load --input /tmp/psi-app-demo.tar
-    #     docker tag psi-app-demo:latest gcr.io/psi-app-demo-300/psi-app-demo:latest
-    #     docker push gcr.io/psi-app-demo-300/psi-app-demo:latest
+        docker load --input /tmp/psi-app-demo.tar
+        docker tag psi-app-demo:latest gcr.io/psi-app-demo-300/psi-app-demo:latest
+        docker push gcr.io/psi-app-demo-300/psi-app-demo:latest
     # - name: Deploy to Cloud Run
     #   uses: google-github-actions/deploy-cloudrun@main
     #   with:
