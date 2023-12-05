@@ -79,5 +79,4 @@ jobs:
         docker push gcr.io/psi-app-demo-300/psi-app-demo:latest
     - name: Deploy to cloud run job
       run: |
-        gcloud run deploy psi-app-demo --image gcr.io/psi-app-demo-300/psi-app-demo:latest --platform managed --region us-central1 --allow-unauthenticated
-  
+        gcloud run jobs create psi-app-demo --image gcr.io/psi-app-demo-300/psi-app-demo:latest
