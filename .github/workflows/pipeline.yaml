@@ -74,7 +74,6 @@ jobs:
     - name: Deploy to Cloud Run
       uses: google-github-actions/deploy-cloudrun@main
       with:
-        image: gcr.io/psi-app-demo-300/psi-app-demo:latest
         service: psi-app-demo
         source: /tmp/psi-app-demo.tar
   
