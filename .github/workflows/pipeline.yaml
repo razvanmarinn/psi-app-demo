@@ -69,7 +69,6 @@ jobs:
     - name: Authenticate with Google Cloud
       uses: 'google-github-actions/auth@v2'
       with:
-        project_id: 'psi-app-demo-300'
         workload_identity_provider: 'projects/919687749794/locations/global/workloadIdentityPools/github-actions/providers/github'
         service_account: 'psi-app-demo@psi-app-demo-300.iam.gserviceaccount.com'
     - name: Upload docker image
