@@ -29,12 +29,14 @@ jobs:
     # - name: Run Flake8
     #   run: flake8 main.py --max-line-length=200
   test:
+    runs on: ubuntu-latest
     needs: build
     steps:
     - name: Run tests
       run: |
         docker run psi-app-demo:latest pytest tests/test.py --verbose
   # deploy:
+  #   runs on: ubuntu-latest
   #   needs: test
   #   steps:
   #   - name: Deploy to Heroku
